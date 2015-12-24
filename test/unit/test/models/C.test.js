@@ -8,7 +8,7 @@ describe('C', function () {
 		B.create({ id: DateTimeService.generateNowDate() })
 				.then(function (newB) {
 					A.create({ name: "my new a" }).then(function (newA) {
-						c.create({ a_id: newA.id, b_id: newB.id, quantity: 12 }).then(function (newC) {
+						C.create({ a_id: newA.id, b_id: newB.id, quantity: 12 }).then(function (newC) {
 							idOfC = newC.id;
 							done();
 						}).catch(done);
@@ -20,11 +20,10 @@ describe('C', function () {
 		destroyCollections(A, B, C, done);
 	});
 
-	it('incrementQ()', function (done) {
-		console.log('THE MODEL', c);
-		console.log('THE MODEL method', c.incrementQ);
-		c.incrementQ(idOfC, -2).then(function (result) {
-			assert.equal(result.quantity, 10, "quantity decremented");
+	it('findOne()', function (done) {
+		C.findOne(idOfC).then(function (result) {
+			sails.log.info("Result of find one is", result);
+			assert.equal(result.quantity, 12, "quantity decremented");
 			done();
 		}).catch(done);
 	});

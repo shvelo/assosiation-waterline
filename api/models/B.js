@@ -9,7 +9,7 @@ module.exports = {
 		end: { type: 'datetime', defaultsTo: new Date(1970, 0, 1, 16, 0, 0) },
 		isTrue: { type: "boolean", required: true, defaultsTo: true },
 		//Relations
-		as: { collection: 'a', through: 'c', via: 'b' },
+		as: { collection: 'a', through: 'c', via: 'b' }
 	}
 };
 

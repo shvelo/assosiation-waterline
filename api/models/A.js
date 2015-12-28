@@ -8,7 +8,6 @@ module.exports = {
 		description: { type: 'string', size: 1000 },
 		//Relations
 		bs: { collection: 'b', through: 'c', via: 'a' }
-
 	}
 };
 

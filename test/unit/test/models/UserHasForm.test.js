@@ -23,7 +23,7 @@ describe('UserHasForm', function () {
 		destroyCollections(User, Form, UserHasForm, done);
 	});
 
-	it('UserHasForm.create()', function (done) {
+  it('poopulateAll()', function (done) {
     UserHasForm.create({
         to_edit: true,
         to_delete: true,
@@ -31,7 +31,11 @@ describe('UserHasForm', function () {
         form_id: form.id
       })
       .then(function (createdRecord){
-        assert(_.isObject(createdRecord));
+        return User.find().populateAll();
+      })
+      .then(function (userFound){
+        console.log(userFound);
+        assert(userFound[0].forms.length);
         done();
       }).catch(done);
   });

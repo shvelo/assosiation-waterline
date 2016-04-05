@@ -17,21 +17,21 @@ before(function (done) {
 		connections: {
 			localDiskDb: {
 				adapter: 'sails-disk'
+			},
+			testMongodbServer: {
+				adapter: 'sails-mongo',
+				host: 'localhost',
+				port: 27017,
+				// user: 'username',
+				// password: 'password',
+				database: 'ass-test'
 			}
-//			testMongodbServer: {
-//				adapter: 'sails-mongo',
-//				host: 'localhost',
-//				port: 27017,
-//				// user: 'username',
-//				// password: 'password',
-//				database: 'sadili-test'
-//			}
 		},
 		session: {
 			adapter: 'memory'
 		},
 		models: {
-			connection: 'localDiskDb',
+			connection: 'testMongodbServer',
 			migrate: 'drop'
 		},
 	}, function (err, server) {

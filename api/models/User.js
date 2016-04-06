@@ -9,7 +9,7 @@ module.exports = {
 
   attributes:
   {
-    email               : { type: 'email', required: true, unique: true },
+    email: { type: 'email', required: true, unique: true },
     //.... some fields
 
     // Add a reference to Forms collection
@@ -18,6 +18,9 @@ module.exports = {
       collection: 'Form',
       via: 'user',
       through: 'userhasform'
+    },
+    address: {
+      model: 'address'
     }
   }
 

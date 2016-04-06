@@ -6,7 +6,7 @@ module.exports = function BaseModel(name, definition) {
   this.attributes = {};
   Object.assign(this, definition);
 
-  this.attributes.customSave = function () {
+  this.attributes.customSave = function (cb) {
     var model = sails.models[name.toLowerCase()],
         update = this.toObject();
 
@@ -20,6 +20,10 @@ module.exports = function BaseModel(name, definition) {
       }
     });
 
-    return model.update(this.id, update).then(() => this);
+    return model.update(this.id, update).then(() => {
+      if(cb)
+        cb(this);
+      return this;
+    }, cb);
   };
 };

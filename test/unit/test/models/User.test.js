@@ -2,7 +2,7 @@
 var assert = require('chai').assert,
   destroyCollections = require('../../../helper').destroyCollections;
 
-describe('UserHasForm', function() {
+describe('User', function() {
   var user, form, address;
 
   before('creating address', function(done) {

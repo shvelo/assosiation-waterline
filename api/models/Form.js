@@ -1,14 +1,21 @@
-//Form.js
-
+/**
+ * @name Form
+ */
 module.exports = {
-  schema: true,
-  tableName: 'forms',
-
-  attributes:
-  {
-    name    : { type: 'string', required: true, unique: true },
-    creator : { type: 'string', unique: false },
-    sequence: { type: 'integer', autoIncrement: true },
+  attributes: {
+    name: {
+      type: 'string',
+      required: true,
+      unique: true
+    },
+    creator: {
+      type: 'string',
+      unique: false
+    },
+    sequence: {
+      type: 'integer',
+      autoIncrement: true
+    },
 
     // Add a reference to the owners Users
     owners: {
@@ -17,5 +24,4 @@ module.exports = {
       through: 'userhasform'
     }
   }
-
 };

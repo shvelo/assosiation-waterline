@@ -1,43 +1,22 @@
 "use strict";
 
-//
-// User.js
-//
-module.exports = {
-  schema: true,
-  tableName: 'users',
-  autoCreatedAt: false,
-  autoUpdatedAt: false,
+var BaseModel = require('./lib/BaseModel');
 
-  attributes:
-  {
-    email: { type: 'email', required: true, unique: true },
-    //.... some fields
+/**
+ * @name User
+ */
+module.exports = new BaseModel("User", {
+  attributes: {
+    email: {type: 'email', required: true, unique: true},
 
     // Add a reference to Forms collection
-    forms:
-    {
+    forms: {
       collection: 'Form',
       via: 'user',
       through: 'userhasform'
     },
     address: {
       model: 'address'
-    },
-    customSave: function() {
-      var update = this.toObject();
-      User.associations.forEach(function(assoc){
-        if(update[assoc.alias] != null) {
-          if(assoc.type === "collection") {
-            delete update[assoc.alias];
-          } else {
-            update[assoc.alias] = update[assoc.alias].id == null ? update[assoc.alias] : update[assoc.alias].id;
-          }
-        }
-      });
-
-      return User.update(this.id, update);
     }
   }
-
-};
+});

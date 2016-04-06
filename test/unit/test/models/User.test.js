@@ -81,4 +81,22 @@ describe('UserHasForm', function () {
       }).catch(done);
   });
 
+	it('retains populated associations after save with populate:true', function (done) {
+		return User.findOne(user.id).populateAll().then(function (userFound){
+				assert(userFound.forms instanceof Array, 'user forms is array before save');
+				assert(userFound.forms.length, 'user has forms before save');
+				assert(userFound.address instanceof Object, 'user address is populated before save');
+				assert(userFound.address.id, address.id, 'user address is populated before save');
+
+				return userFound.save({
+					populate: true
+				}).then(function(){
+					assert(userFound.forms instanceof Array, 'user forms is array after save');
+					assert(userFound.forms.length, 'user has forms after save');
+					assert(userFound.address instanceof Object, 'user address is populated after save');
+					assert(userFound.address.id, address.id, 'user address is populated after save');
+					done();
+				});
+			}).catch(done);
+	});
 });
